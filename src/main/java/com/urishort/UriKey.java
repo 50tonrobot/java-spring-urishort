@@ -37,7 +37,7 @@ public class UriKey {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        return "http://" + address.getCanonicalHostName() + ":9291/" + UriKey.getUriKey(uriId);
+        return "http://" + address.getCanonicalHostName() + "/" + UriKey.getUriKey(uriId);
     }
 
     public static UriShort setUriShort(UriShort uriShort) {
@@ -48,7 +48,7 @@ public class UriKey {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        uriShort.setUriShort("http://" + address.getCanonicalHostName() + ":9291/" + UriKey.getUriKey(uriShort.getUriId()));
+        uriShort.setUriShort("http://" + address.getCanonicalHostName() + "/" + UriKey.getUriKey(uriShort.getUriId()));
         return uriShort;
     }
 
