@@ -1,0 +1,21 @@
+version: '2'
+services:
+#  demo:
+#        build:
+#          context: .
+#          dockerfile: Dockerfile-java
+#    depends_on:
+#      - mysql
+#    container_name: shorturi
+#    ports:
+#      - "80:9291"
+  mysql:
+    container_name: urishort_mysql
+    image: mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: dTRKn3JPWbAAxRE42uE3dkFaJOC7nuT9
+      MYSQL_DATABASE: urishort
+      MYSQL_USER: urishort_user
+      MYSQL_PASSWORD: dTRKn3JPWbAAxRE42uE3dkFaJOC7nuT9
