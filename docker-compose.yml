@@ -1,21 +1,29 @@
 version: '2'
 services:
-#  demo:
-#        build:
-#          context: .
-#          dockerfile: Dockerfile-java
-#    depends_on:
-#      - mysql
-#    container_name: shorturi
-#    ports:
-#      - "80:9291"
+  demo:
+    build:
+      context: ./app
+      dockerfile: Dockerfile-java
+    depends_on:
+      - "mysql"
+    container_name: urishort_java
+    ports:
+      - "80:80"
+    networks:
+        - code-network
+    command: ["/usr/local/bin/wait-for-mysql.sh", "urishort_mysql", "init.sh"]
   mysql:
     container_name: urishort_mysql
     image: mysql
     ports:
       - "3306:3306"
+    networks:
+        - code-network
     environment:
       MYSQL_ROOT_PASSWORD: dTRKn3JPWbAAxRE42uE3dkFaJOC7nuT9
       MYSQL_DATABASE: urishort
       MYSQL_USER: urishort_user
       MYSQL_PASSWORD: dTRKn3JPWbAAxRE42uE3dkFaJOC7nuT9
+networks:
+    code-network:
+        driver: bridge

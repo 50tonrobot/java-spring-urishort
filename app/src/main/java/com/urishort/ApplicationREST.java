@@ -57,7 +57,7 @@ public class ApplicationREST {
      * @return
      */
     @RequestMapping(path = "/uri/{uriKey}",method = RequestMethod.DELETE)
-    public ResponseEntity<HashMap> deleteUriShort(@PathVariable("uriKey") String uriKey) {
+    public ResponseEntity<HashMap<String, String>> deleteUriShort(@PathVariable("uriKey") String uriKey) {
         UriShort uriShort = uriShortRepository.findOne(UriKey.getUriId(uriKey));
         if(uriShort != null) {
             UriKey.setUriShort(uriShort);

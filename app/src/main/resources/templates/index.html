@@ -147,7 +147,7 @@
                 data: {uriOriginal:$('#uriOriginal-field').val()},
                 dataType: 'json',
                 success: function(data) {
-                    $('#link-output').html("<a href='" + data.uriShort + "'>" + data.uriShort + "</a>");
+                    $('#link-output').html("<a href='http://" + document.location.hostname + "/" + data.uriShort + "'>http://" + document.location.hostname + "/" + data.uriShort + "</a>");
                 }
             });
         });

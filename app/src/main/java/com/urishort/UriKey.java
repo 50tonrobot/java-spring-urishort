@@ -30,25 +30,11 @@ public class UriKey {
     }
 
     public static String getUriShort(long uriId) {
-        byte[] ipAddress = new byte[] { 127, 0, 0, 1 };
-        InetAddress address = null;
-        try {
-            address = InetAddress.getByAddress(ipAddress);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        return "http://" + address.getCanonicalHostName() + "/" + UriKey.getUriKey(uriId);
+        return UriKey.getUriKey(uriId);
     }
 
     public static UriShort setUriShort(UriShort uriShort) {
-        byte[] ipAddress = new byte[] { 127, 0, 0, 1 };
-        InetAddress address = null;
-        try {
-            address = InetAddress.getByAddress(ipAddress);
-        } catch (UnknownHostException e) {
-            e.printStackTrace();
-        }
-        uriShort.setUriShort("http://" + address.getCanonicalHostName() + "/" + UriKey.getUriKey(uriShort.getUriId()));
+        uriShort.setUriShort(UriKey.getUriKey(uriShort.getUriId()));
         return uriShort;
     }
 

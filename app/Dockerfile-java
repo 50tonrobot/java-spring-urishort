@@ -1,0 +1,9 @@
+FROM maven:3-jdk-8
+COPY ./config/init.sh /usr/local/bin/init.sh
+COPY ./config/wait-for-mysql.sh /usr/local/bin/wait-for-mysql.sh
+RUN chmod +x /usr/local/bin/*.sh \
+    && apt-get update && apt-get install -y vim locate mysql-client
+
+RUN mkdir -p /usr/src/app
+WORKDIR /usr/src/app
+COPY . /usr/src/app
