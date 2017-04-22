@@ -16,15 +16,20 @@ public class ApplicationWeb {
     @Autowired
     private UriShortRepository uriShortRepository;
 
+    /**
+     * User facing landing page.
+     * @param name
+     * @param model
+     * @return
+     */
     @RequestMapping(path = "/", method = RequestMethod.GET)
     public String homepageView(@RequestParam(value = "name", required = false) String name, Model model) {
         model.addAttribute("name",name);
         return "index";
-
     }
 
     /**
-     * Request for redirect; this will redirect user to the stored long uri
+     * User facing redirect; this will redirect user to the stored long uri
      * @param uriKey
      * @return
      */
