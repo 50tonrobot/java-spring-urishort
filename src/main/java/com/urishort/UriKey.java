@@ -10,18 +10,18 @@ public class UriKey {
     public static final String NUMERALS = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-_.~";
     public static final int BASE = NUMERALS.length();
 
-    public static String getUriKey(int uriId) {
+    public static String getUriKey(long uriId) {
         StringBuilder uriKey = new StringBuilder();
-        int clonedUriId = uriId;
+        long clonedUriId = uriId;
         while (clonedUriId > 0) {
-            uriKey.insert(0, NUMERALS.charAt(clonedUriId % BASE));
+            uriKey.insert(0, NUMERALS.charAt((int) clonedUriId % BASE));
             clonedUriId = clonedUriId / BASE;
         }
         return uriKey.toString();
     }
 
-    public static int getUriId(String uriKey) {
-        Integer uriId = 0;
+    public static long getUriId(String uriKey) {
+        long uriId = 0;
         for (int i = 0; i < uriKey.length(); i++) {
             uriId = uriId * BASE + NUMERALS.indexOf(uriKey.charAt(i));
         }
@@ -29,7 +29,7 @@ public class UriKey {
         return uriId;
     }
 
-    public static String getUriShort(int uriId) {
+    public static String getUriShort(long uriId) {
         byte[] ipAddress = new byte[] { 127, 0, 0, 1 };
         InetAddress address = null;
         try {
@@ -37,7 +37,19 @@ public class UriKey {
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
-        return "http://" + address.getCanonicalHostName() + "/" + UriKey.getUriKey(uriId);
+        return "http://" + address.getCanonicalHostName() + ":9291/" + UriKey.getUriKey(uriId);
+    }
+
+    public static UriShort setUriShort(UriShort uriShort) {
+        byte[] ipAddress = new byte[] { 127, 0, 0, 1 };
+        InetAddress address = null;
+        try {
+            address = InetAddress.getByAddress(ipAddress);
+        } catch (UnknownHostException e) {
+            e.printStackTrace();
+        }
+        uriShort.setUriShort("http://" + address.getCanonicalHostName() + ":9291/" + UriKey.getUriKey(uriShort.getUriId()));
+        return uriShort;
     }
 
 }

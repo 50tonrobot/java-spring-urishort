@@ -9,6 +9,9 @@ import javax.persistence.*;
  */
 
 @Entity
+@Table(name = "lookup", indexes = {
+        @Index(columnList = "uriOriginal", name = "uriOriginal_x")
+})
 public class UriShort extends ResourceSupport {
     /**
      * Creates a new uri
@@ -18,15 +21,15 @@ public class UriShort extends ResourceSupport {
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
-    private Integer uriId;
+    private long uriId;
 
-    @Column(unique = true, columnDefinition="TEXT")
+    @Column(columnDefinition="TEXT")
     private String uriOriginal;
 
     @Transient
     private String uriShort;
 
-    public Integer getUriId() {
+    public long getUriId() {
         return uriId;
     }
 

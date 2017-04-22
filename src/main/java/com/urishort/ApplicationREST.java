@@ -36,17 +36,20 @@ public class ApplicationREST {
     }
 
     /**
-     * Request for redirect; this will redirect user to the stored long uri
+     * Get a uri from the DB by the uriKey
      * @param uriKey
      * @return
      */
-    @RequestMapping(path = "/{uriKey}",method = RequestMethod.GET)
-    public HttpEntity<UriShort> uriRedirect(@PathVariable("uriKey") String uriKey) {
-        UriShort uriShort = new UriShort();
+    @RequestMapping(path = "/uri/{uriKey}",method = RequestMethod.GET)
+    public ResponseEntity<UriShort> uriRedirect(@PathVariable("uriKey") String uriKey) {
+        UriShort uriShort = uriShortRepository.findOne(UriKey.getUriId(uriKey));
+        UriKey.setUriShort(uriShort);
         uriShort.add(linkTo(methodOn(ApplicationREST.class).uriRedirect(uriKey)).withSelfRel());
 
         return new ResponseEntity<>(uriShort, HttpStatus.OK);
     }
+
+
 
     //UPDATE
     //@GetMapping("/uri/{id}")
